@@ -1,0 +1,19 @@
+{
+  "name": “patternfly-web-components",
+  "description": "",
+  "version": “1.0.0”,
+  "keywords": [
+    “patternfly”
+  ],
+  "author": "",
+  "licenses": [
+    {    }
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-watch": "~0.5.3"
+  }
+}

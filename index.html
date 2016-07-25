@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Component &middot; Bootstrap</title>
+  <!-- Web Components polyfills (http://webcomponents.org) -->
+  <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+  <link rel="stylesheet" href="bower_components/patternfly/dist/css/patternfly.min.css"/>
+  <link rel="stylesheet" href="bower_components/patternfly/dist/css/patternfly-additions.min.css"/>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+  <template id="x-css">
+    bs-progress {
+    display: block;
+    }
+  </template>
+
+  <link rel="import" href="components/pf-progress.html">
+  <style>
+    h3 {
+      color: red;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+<!-- The core React library -->
+<script src="https://fb.me/react-15.2.0.js"></script>
+<!-- The ReactDOM Library -->
+<script src="https://fb.me/react-dom-15.2.0.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+
+  <div class="container">
+  <div class="row">
+    <h3 class="col-md-12">Progress Bars</h3>
+    <div class="col-md-6" id="progress-demo" >
+      <pf-progress value="10"></pf-progress>
+      <pf-progress value="20" type="info"></pf-progress>
+      <pf-progress value="40" type="success"></pf-progress>
+      <pf-progress value="60" type="warning" striped></pf-progress>
+      <pf-progress value="80" type="danger" striped animated></pf-progress>
+    </div>
+  </div>
+    <!-- this is the container for the react component -->
+    <div id="container">
+
+    </div>
+  </div>
+
+  <script type="text/babel">
+    var ExampleApplication = React.createClass({
+      getInitialState: function() {
+        return {
+          count: 40,
+          type: 'success'
+        };
+      },
+      change: function(event){
+        this.state.type = event.target.value;
+        this.forceUpdate();
+      },
+      stepperChange: function(event){
+        this.state.count = event.target.value;
+        this.forceUpdate();
+      },
+      render: function() {
+        return (
+          <div>
+            <div className="row">
+              <div className="col-md-6">
+                <pf-progress value={this.state.count} type={this.state.type}></pf-progress>
+              </div>
+            </div>
+            <div className="row">
+               <div className="col-md-6">
+                 <span>Progress type and value:</span><br />
+                 <select onChange={this.change} value={this.state.type}>
+                   <option value="info">Info</option>
+                   <option value="success">Success</option>
+                   <option value="warning">Warning</option>
+                 </select>&nbsp;&nbsp;
+                 <input type="number" name="quantity" min="1" max="100" value={this.state.count} onChange={this.stepperChange} />
+               </div>
+            </div>
+          </div>
+        )
+      }
+    });
+    ReactDOM.render(
+      <ExampleApplication />,
+      document.getElementById('container')
+    );
+    //}, 50);
+  </script>
+</body>
+</html>

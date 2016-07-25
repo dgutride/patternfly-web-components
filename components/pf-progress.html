@@ -1,0 +1,68 @@
+<template id="template">
+    <style>
+        @import "bower_components/patternfly/dist/css/patternfly.min.css";
+        @import "bower_components/patternfly/dist/css/patternfly-additions.min.css";
+        h3 {
+            color: blue;
+        }
+
+    </style>
+    <h3 role="title"></h3>
+    <developersrow/>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0;"></div>
+    </div>
+</template>
+<script>
+    var myDoc = document.currentScript === document._currentScript ? document.currentScript.ownerDocument: document._currentScript.ownerDocument;
+    var shadow = document._currentScript.ownerDocument;
+
+    XProgress = document.registerElement('pf-progress', {
+        prototype: Object.create(HTMLElement.prototype, {
+                createdCallback: {
+                value: function() {
+                    var template = myDoc.querySelector('#template');
+                    var rootHost = this.createShadowRoot();
+                    rootHost.appendChild(template.content.cloneNode(true));
+
+                    var attrs = this.attributes;
+                    for (var i = 0; i < attrs.length; i++) {
+                        this.attributeChangedCallback(attrs[i].name.toLowerCase(), null, attrs[i].value);
+                    }
+
+                    this.classList.add('progress');
+                }
+            },
+            attributeChangedCallback: {
+                value: function(name, oldValue, value) {
+                    var action;
+                    var elmProgressbar = this.shadowRoot.querySelector('[role=progressbar]');
+
+                    if (name === 'value') {
+                        elmProgressbar.setAttribute('aria-valuenow', value);
+                        elmProgressbar.style.width = value + '%';
+
+                    } else if (name === 'type') {
+                        elmProgressbar.classList.add('progress-bar-' + value);
+                        if (oldValue) {
+                            elmProgressbar.classList.remove('progress-bar-' + oldValue);
+                        }
+                    } else if (name === 'striped') {
+                        action = (value === 'false' || value === null) ? 'remove' : 'add';
+                        this.classList[action]('progress-striped');
+
+                    } else if (/animated|active/i.test(name)) {
+                        action = (value === 'false' || value === null) ? 'remove' : 'add';
+                        this.classList[action]('active');
+                    }
+
+                    var titleElement = this.shadowRoot.querySelector('[role=title]');
+                    if(name === 'type') {
+                        titleElement.textContent = value;
+                    }
+
+                }
+            }
+        })
+    });
+</script>
