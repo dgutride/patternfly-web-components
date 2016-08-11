@@ -1,13 +1,13 @@
 {
-  "name": “patternfly-web-components",
+  "name": "patternfly-web-components",
   "description": "",
-  "version": “1.0.0”,
+  "version": "1.0.0",
   "keywords": [
-    “patternfly”
+    "patternfly"
   ],
   "author": "",
   "licenses": [
-    {    }
+    {}
   ],
   "devDependencies": {
     "grunt": "~0.4.1",
