@@ -1,0 +1,14 @@
+{
+  "name": "patternfly-web-components",
+  "description": "",
+  "version": "1.0.0",
+  "keywords": [
+    "patternfly"
+  ],
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "patternfly": "^3.8.1",
+    "webcomponentsjs": "^0.7.22"
+  }
+}
